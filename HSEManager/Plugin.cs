@@ -18,6 +18,9 @@ namespace HSEManager
         public static ConfigEntry<float> BaseHealth;
         public static ConfigEntry<float> BaseStamina;
         public static ConfigEntry<float> BaseEitr;
+        public static ConfigEntry<float> HealthRegenPerSecond;
+        public static ConfigEntry<float> StaminaRegenPerSecond;
+        public static ConfigEntry<float> EitrRegenPerSecond;
 
         private Harmony _harmony;
 
@@ -46,10 +49,31 @@ namespace HSEManager
                 "Base Eitr value for the local player, before food bonuses are added. Vanilla default is 0 (Eitr normally comes entirely from food)."
             );
 
+            HealthRegenPerSecond = Config.Bind(
+                "Regeneration",
+                "HealthRegenPerSecond",
+                0f,
+                "Extra health regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+            );
+
+            StaminaRegenPerSecond = Config.Bind(
+                "Regeneration",
+                "StaminaRegenPerSecond",
+                0f,
+                "Extra stamina regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+            );
+
+            EitrRegenPerSecond = Config.Bind(
+                "Regeneration",
+                "EitrRegenPerSecond",
+                0f,
+                "Extra Eitr regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+            );
+
             _harmony = new Harmony(PluginGUID);
             _harmony.PatchAll();
 
-            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value}");
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value} HealthRegenPerSecond = {HealthRegenPerSecond.Value}, StaminaRegenPerSecond = {StaminaRegenPerSecond.Value}, EitrRegenPerSecond = {EitrRegenPerSecond.Value}");
         }
     }
 }
