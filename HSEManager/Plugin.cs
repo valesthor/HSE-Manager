@@ -17,6 +17,7 @@ namespace HSEManager
         // Local (client-side) config. Server authority will be added later.
         public static ConfigEntry<float> BaseHealth;
         public static ConfigEntry<float> BaseStamina;
+        public static ConfigEntry<float> BaseEitr;
 
         private Harmony _harmony;
 
@@ -38,10 +39,17 @@ namespace HSEManager
                 "Base stamina value for the local player, before food bonuses are added. Vanilla default is 75."
             );
 
+            BaseEitr = Config.Bind(
+                "Eitr",
+                "BaseEitr",
+                0f,
+                "Base Eitr value for the local player, before food bonuses are added. Vanilla default is 0 (Eitr normally comes entirely from food)."
+            );
+
             _harmony = new Harmony(PluginGUID);
             _harmony.PatchAll();
 
-            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}");
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value}");
         }
     }
 }
