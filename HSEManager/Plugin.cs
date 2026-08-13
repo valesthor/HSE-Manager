@@ -21,6 +21,8 @@ namespace HSEManager
         public static ConfigEntry<float> HealthRegenPerSecond;
         public static ConfigEntry<float> StaminaRegenPerSecond;
         public static ConfigEntry<float> EitrRegenPerSecond;
+        public static ConfigEntry<bool> InfiniteStamina;
+        public static ConfigEntry<bool> InfiniteEitr;
 
         private Harmony _harmony;
 
@@ -70,10 +72,24 @@ namespace HSEManager
                 "Extra Eitr regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
             );
 
+            InfiniteStamina = Config.Bind(
+                "Stamina",
+                "InfiniteStamina",
+                false,
+                "If enabled, stamina is never actually consumed. All vanilla actions and their calculations still run normally. Default: disabled."
+            );
+
+            InfiniteEitr = Config.Bind(
+                "Eitr",
+                "InfiniteEitr",
+                false,
+                "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled."
+            );
+
             _harmony = new Harmony(PluginGUID);
             _harmony.PatchAll();
 
-            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value} HealthRegenPerSecond = {HealthRegenPerSecond.Value}, StaminaRegenPerSecond = {StaminaRegenPerSecond.Value}, EitrRegenPerSecond = {EitrRegenPerSecond.Value}");
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value} HealthRegenPerSecond = {HealthRegenPerSecond.Value}, StaminaRegenPerSecond = {StaminaRegenPerSecond.Value}, EitrRegenPerSecond = {EitrRegenPerSecond.Value} InfiniteStamina = {InfiniteStamina.Value}, InfiniteEitr = {InfiniteEitr.Value}");
         }
     }
 }
