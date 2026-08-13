@@ -1,5 +1,7 @@
 using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
+using HarmonyLib;
 
 namespace HSEManager
 {
@@ -12,10 +14,26 @@ namespace HSEManager
 
         internal static ManualLogSource Log;
 
+        // Local (client-side) config. Server authority will be added later.
+        public static ConfigEntry<float> BaseHealth;
+
+        private Harmony _harmony;
+
         private void Awake()
         {
             Log = Logger;
-            Log.LogInfo($"{PluginName} v{PluginVersion} loaded.");
+
+            BaseHealth = Config.Bind(
+                "Health",
+                "BaseHealth",
+                25f,
+                "Base health value for the local player, before food bonuses are added. Vanilla default is 25."
+            );
+
+            _harmony = new Harmony(PluginGUID);
+            _harmony.PatchAll();
+
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}");
         }
     }
 }
