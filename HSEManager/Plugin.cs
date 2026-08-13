@@ -35,92 +35,97 @@ namespace HSEManager
         {
             Log = Logger;
 
+            // ---------- 01. Health ----------
             BaseHealth = Config.Bind(
-                "Health",
+                "01. Health",
                 "BaseHealth",
                 25f,
                 "Base health value for the local player, before food bonuses are added. Vanilla default is 25."
             );
 
+            // ---------- 02. Stamina ----------
             BaseStamina = Config.Bind(
-                "Stamina",
+                "02. Stamina",
                 "BaseStamina",
                 75f,
                 "Base stamina value for the local player, before food bonuses are added. Vanilla default is 75."
             );
 
+            InfiniteStamina = Config.Bind(
+                "02. Stamina",
+                "InfiniteStamina",
+                false,
+                "If enabled, stamina is never actually consumed. All vanilla actions and their calculations still run normally. Default: disabled."
+            );
+
+            // ---------- 03. Eitr ----------
             BaseEitr = Config.Bind(
-                "Eitr",
+                "03. Eitr",
                 "BaseEitr",
                 0f,
                 "Base Eitr value for the local player, before food bonuses are added. Vanilla default is 0 (Eitr normally comes entirely from food)."
             );
 
+            InfiniteEitr = Config.Bind(
+                "03. Eitr",
+                "InfiniteEitr",
+                false,
+                "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled."
+            );
+
+            // ---------- 04. Regeneration ----------
             HealthRegenPerSecond = Config.Bind(
-                "Regeneration",
+                "04. Regeneration",
                 "HealthRegenPerSecond",
                 0f,
                 "Extra health regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
             );
 
             StaminaRegenPerSecond = Config.Bind(
-                "Regeneration",
+                "04. Regeneration",
                 "StaminaRegenPerSecond",
                 0f,
                 "Extra stamina regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
             );
 
             EitrRegenPerSecond = Config.Bind(
-                "Regeneration",
+                "04. Regeneration",
                 "EitrRegenPerSecond",
                 0f,
                 "Extra Eitr regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
             );
 
-            InfiniteStamina = Config.Bind(
-                "Stamina",
-                "InfiniteStamina",
-                false,
-                "If enabled, stamina is never actually consumed. All vanilla actions and their calculations still run normally. Default: disabled."
-            );
-
-            InfiniteEitr = Config.Bind(
-                "Eitr",
-                "InfiniteEitr",
-                false,
-                "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled."
-            );
-
+            // ---------- 05. HUD ----------
             FixedHealthBar = Config.Bind(
-                "HUD",
+                "05. HUD",
                 "FixedHealthBar",
                 false,
                 "If enabled, the health bar keeps a fixed visual width (as if max health were 100), regardless of actual max health. Values and fill percentage are unaffected. Default: disabled."
             );
 
             FixedStaminaBar = Config.Bind(
-                "HUD",
+                "05. HUD",
                 "FixedStaminaBar",
                 false,
                 "If enabled, the stamina bar keeps a fixed visual width (as if max stamina were 100), regardless of actual max stamina. Values and fill percentage are unaffected. Default: disabled."
             );
 
-            FixedEitrBar = Config.Bind(
-                "HUD",
-                "FixedEitrBar",
-                false,
-                "If enabled, the Eitr bar keeps a fixed visual width (as if max Eitr were 100), regardless of actual max Eitr. Values and fill percentage are unaffected. Default: disabled."
-            );
-
             AlwaysShowStaminaBar = Config.Bind(
-                "HUD",
+                "05. HUD",
                 "AlwaysShowStaminaBar",
                 false,
                 "If enabled, the stamina bar stays visible at all times, even when full and unused. Has no effect if Infinite Stamina is on (bar already stays hidden in that case). Default: disabled."
             );
 
+            FixedEitrBar = Config.Bind(
+                "05. HUD",
+                "FixedEitrBar",
+                false,
+                "If enabled, the Eitr bar keeps a fixed visual width (as if max Eitr were 100), regardless of actual max Eitr. Values and fill percentage are unaffected. Default: disabled."
+            );
+
             AlwaysShowEitrBar = Config.Bind(
-                "HUD",
+                "05. HUD",
                 "AlwaysShowEitrBar",
                 false,
                 "If enabled, the Eitr bar stays visible at all times, even when full and unused. Has no effect if Infinite Eitr is on (bar already stays hidden in that case). Default: disabled."
