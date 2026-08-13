@@ -23,6 +23,11 @@ namespace HSEManager
         public static ConfigEntry<float> EitrRegenPerSecond;
         public static ConfigEntry<bool> InfiniteStamina;
         public static ConfigEntry<bool> InfiniteEitr;
+        public static ConfigEntry<bool> FixedHealthBar;
+        public static ConfigEntry<bool> FixedStaminaBar;
+        public static ConfigEntry<bool> FixedEitrBar;
+        public static ConfigEntry<bool> AlwaysShowStaminaBar;
+        public static ConfigEntry<bool> AlwaysShowEitrBar;
 
         private Harmony _harmony;
 
@@ -86,10 +91,45 @@ namespace HSEManager
                 "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled."
             );
 
+            FixedHealthBar = Config.Bind(
+                "HUD",
+                "FixedHealthBar",
+                false,
+                "If enabled, the health bar keeps a fixed visual width (as if max health were 100), regardless of actual max health. Values and fill percentage are unaffected. Default: disabled."
+            );
+
+            FixedStaminaBar = Config.Bind(
+                "HUD",
+                "FixedStaminaBar",
+                false,
+                "If enabled, the stamina bar keeps a fixed visual width (as if max stamina were 100), regardless of actual max stamina. Values and fill percentage are unaffected. Default: disabled."
+            );
+
+            FixedEitrBar = Config.Bind(
+                "HUD",
+                "FixedEitrBar",
+                false,
+                "If enabled, the Eitr bar keeps a fixed visual width (as if max Eitr were 100), regardless of actual max Eitr. Values and fill percentage are unaffected. Default: disabled."
+            );
+
+            AlwaysShowStaminaBar = Config.Bind(
+                "HUD",
+                "AlwaysShowStaminaBar",
+                false,
+                "If enabled, the stamina bar stays visible at all times, even when full and unused. Has no effect if Infinite Stamina is on (bar already stays hidden in that case). Default: disabled."
+            );
+
+            AlwaysShowEitrBar = Config.Bind(
+                "HUD",
+                "AlwaysShowEitrBar",
+                false,
+                "If enabled, the Eitr bar stays visible at all times, even when full and unused. Has no effect if Infinite Eitr is on (bar already stays hidden in that case). Default: disabled."
+            );
+
             _harmony = new Harmony(PluginGUID);
             _harmony.PatchAll();
 
-            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value} HealthRegenPerSecond = {HealthRegenPerSecond.Value}, StaminaRegenPerSecond = {StaminaRegenPerSecond.Value}, EitrRegenPerSecond = {EitrRegenPerSecond.Value} InfiniteStamina = {InfiniteStamina.Value}, InfiniteEitr = {InfiniteEitr.Value}");
+            Log.LogInfo($"{PluginName} v{PluginVersion} loaded. BaseHealth = {BaseHealth.Value}, BaseStamina = {BaseStamina.Value}, BaseEitr = {BaseEitr.Value} HealthRegenPerSecond = {HealthRegenPerSecond.Value}, StaminaRegenPerSecond = {StaminaRegenPerSecond.Value}, EitrRegenPerSecond = {EitrRegenPerSecond.Value} InfiniteStamina = {InfiniteStamina.Value}, InfiniteEitr = {InfiniteEitr.Value} FixedHealthBar = {FixedHealthBar.Value}, FixedStaminaBar = {FixedStaminaBar.Value}, FixedEitrBar = {FixedEitrBar.Value} AlwaysShowStaminaBar = {AlwaysShowStaminaBar.Value}, AlwaysShowEitrBar = {AlwaysShowEitrBar.Value}");
         }
     }
 }
