@@ -24,6 +24,10 @@
       <HintPath>..\lib\0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
+    <Reference Include="Jotunn">
+      <HintPath>..\lib\Jotunn.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
     <Reference Include="UnityEngine">
       <HintPath>..\lib\UnityEngine.dll</HintPath>
       <Private>false</Private>

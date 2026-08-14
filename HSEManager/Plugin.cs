@@ -2,10 +2,13 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
+using Jotunn.Utils;
 
 namespace HSEManager
 {
     [BepInPlugin(PluginGUID, PluginName, PluginVersion)]
+    [BepInDependency(Jotunn.Main.ModGuid)]
+    [NetworkCompatibility(CompatibilityLevel.EveryoneMustHaveMod, VersionStrictness.Minor)]
     public class Plugin : BaseUnityPlugin
     {
         public const string PluginGUID = "valesthor.hsemanager";
@@ -14,7 +17,9 @@ namespace HSEManager
 
         internal static ManualLogSource Log;
 
-        // Local (client-side) config. Server authority will be added later.
+        // Gameplay configs (server-authoritative via Jotunn IsAdminOnly when connected
+        // to a server; local value applies in single-player, since the local player
+        // is always considered admin there).
         public static ConfigEntry<float> BaseHealth;
         public static ConfigEntry<float> BaseStamina;
         public static ConfigEntry<float> BaseEitr;
@@ -23,6 +28,8 @@ namespace HSEManager
         public static ConfigEntry<float> EitrRegenPerSecond;
         public static ConfigEntry<bool> InfiniteStamina;
         public static ConfigEntry<bool> InfiniteEitr;
+
+        // HUD configs (always local/client-only, never synced from server).
         public static ConfigEntry<bool> FixedHealthBar;
         public static ConfigEntry<bool> FixedStaminaBar;
         public static ConfigEntry<bool> FixedEitrBar;
@@ -35,12 +42,18 @@ namespace HSEManager
         {
             Log = Logger;
 
+            // Server-authoritative attribute, shared by every gameplay config below.
+            ConfigurationManagerAttributes isAdminOnly = new ConfigurationManagerAttributes { IsAdminOnly = true };
+
             // ---------- 01. Health ----------
             BaseHealth = Config.Bind(
                 "01. Health",
                 "BaseHealth",
                 25f,
-                "Base health value for the local player, before food bonuses are added. Vanilla default is 25."
+                new ConfigDescription(
+                    "Base health value for the local player, before food bonuses are added. Vanilla default is 25. Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             // ---------- 02. Stamina ----------
@@ -48,14 +61,20 @@ namespace HSEManager
                 "02. Stamina",
                 "BaseStamina",
                 75f,
-                "Base stamina value for the local player, before food bonuses are added. Vanilla default is 75."
+                new ConfigDescription(
+                    "Base stamina value for the local player, before food bonuses are added. Vanilla default is 75. Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             InfiniteStamina = Config.Bind(
                 "02. Stamina",
                 "InfiniteStamina",
                 false,
-                "If enabled, stamina is never actually consumed. All vanilla actions and their calculations still run normally. Default: disabled."
+                new ConfigDescription(
+                    "If enabled, stamina is never actually consumed. All vanilla actions and their calculations still run normally. Default: disabled. Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             // ---------- 03. Eitr ----------
@@ -63,14 +82,20 @@ namespace HSEManager
                 "03. Eitr",
                 "BaseEitr",
                 0f,
-                "Base Eitr value for the local player, before food bonuses are added. Vanilla default is 0 (Eitr normally comes entirely from food)."
+                new ConfigDescription(
+                    "Base Eitr value for the local player, before food bonuses are added. Vanilla default is 0 (Eitr normally comes entirely from food). Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             InfiniteEitr = Config.Bind(
                 "03. Eitr",
                 "InfiniteEitr",
                 false,
-                "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled."
+                new ConfigDescription(
+                    "If enabled, Eitr is never actually consumed. All vanilla spells and their calculations still run normally. Default: disabled. Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             // ---------- 04. Regeneration ----------
@@ -78,24 +103,33 @@ namespace HSEManager
                 "04. Regeneration",
                 "HealthRegenPerSecond",
                 0f,
-                "Extra health regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+                new ConfigDescription(
+                    "Extra health regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default). Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             StaminaRegenPerSecond = Config.Bind(
                 "04. Regeneration",
                 "StaminaRegenPerSecond",
                 0f,
-                "Extra stamina regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+                new ConfigDescription(
+                    "Extra stamina regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default). Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
             EitrRegenPerSecond = Config.Bind(
                 "04. Regeneration",
                 "EitrRegenPerSecond",
                 0f,
-                "Extra Eitr regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default)."
+                new ConfigDescription(
+                    "Extra Eitr regeneration per second, on top of vanilla regen. Works independently of food and Comfort. 0 = disabled (default). Server-authoritative: locked to the server's value while connected to a multiplayer server.",
+                    null,
+                    isAdminOnly)
             );
 
-            // ---------- 05. HUD ----------
+            // ---------- 05. HUD (always local — never synced) ----------
             FixedHealthBar = Config.Bind(
                 "05. HUD",
                 "FixedHealthBar",
