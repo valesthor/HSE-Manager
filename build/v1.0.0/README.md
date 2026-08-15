@@ -1,7 +1,7 @@
 # Health, Stamina & Eitr - Manager
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/cover.png" alt="Health, Stamina and Eitr Manager for Valheim" width="800">
+  <img src="docs/cover.png" alt="Health, Stamina and Eitr Manager for Valheim" width="800">
 </p>
 
 <p align="center">
@@ -31,13 +31,13 @@ Your food still matters. Your Comfort still matters. Your skills still level up 
 <table>
   <tr>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/screenshots/base-values.gif" alt="Base health, stamina and Eitr values combined with vanilla food bonuses" width="280"><br>
+      <img src="docs/screenshots/base-values.gif" alt="Base health, stamina and Eitr values combined with vanilla food bonuses" width="280"><br>
     </td>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/screenshots/fixed-hud.gif" alt="Fixed-width HUD bars staying compact at high resource values" width="280"><br>
+      <img src="docs/screenshots/fixed-hud.gif" alt="Fixed-width HUD bars staying compact at high resource values" width="280"><br>
     </td>
     <td align="center">
-      <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/screenshots/infinite-resources.gif" alt="Infinite stamina and Eitr during combat" width="280"><br>
+      <img src="docs/screenshots/infinite-resources.gif" alt="Infinite stamina and Eitr during combat" width="280"><br>
     </td>
   </tr>
 </table>
@@ -85,7 +85,7 @@ HSE Manager stays free, but staying maintained and up to date with every Valheim
 
 <p align="left">
   <a href="https://buymeacoffee.com/valesthor">
-    <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/donate.png" alt="The bees need you to be happy. Donate now." width="320">
+    <img src="docs/donate.png" alt="The bees need you to be happy. Donate now." width="320">
   </a>
 </p>
 
@@ -93,7 +93,7 @@ __Tap the banner or scan the QR – Odin approves!__
 
 <p align="left">
   <a href="https://buymeacoffee.com/valesthor">
-    <img src="https://raw.githubusercontent.com/valesthor/HSE-Manager/main/docs/qr-code.png" alt="Qr-code: Buy Me a Coffee." width="200">
+    <img src="docs/qr-code.png" alt="Qr-code: Buy Me a Coffee." width="200">
   </a>
 </p>
 

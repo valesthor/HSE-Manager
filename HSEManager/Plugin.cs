@@ -13,7 +13,7 @@ namespace HSEManager
     {
         public const string PluginGUID = "valesthor.hsemanager";
         public const string PluginName = "Health, Stamina & Eitr - Manager";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.1";
 
         internal static ManualLogSource Log;
 

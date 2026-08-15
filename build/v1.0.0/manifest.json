@@ -1,6 +1,6 @@
 {
   "name": "Health_Stamina_Eitr_Manager",
-  "version_number": "1.0.1",
+  "version_number": "1.0.0",
   "website_url": "https://github.com/Valesthor/HSE-Manager",
   "description": "Health, Stamina and Eitr configuration for Valheim. Set custom base values, add extra regeneration, enable infinite resources, and get a compact fixed-size HUD. Server-authoritative in multiplayer, fully local in single-player.",
   "dependencies": [
