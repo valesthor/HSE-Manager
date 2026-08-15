@@ -89,6 +89,14 @@ HSE Manager stays free, but staying maintained and up to date with every Valheim
   </a>
 </p>
 
+__Tap the banner or scan the QR – Odin approves!__
+
+<p align="left">
+  <a href="https://buymeacoffee.com/valesthor">
+    <img src="docs/qr-code.png" alt="Qr-code: Buy Me a Coffee." width="200">
+  </a>
+</p>
+
 <!-- Swap the href above and the badge below once you have picked a donation platform -->
 
 ## Found a bug?
